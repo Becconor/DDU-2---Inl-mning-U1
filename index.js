@@ -65,33 +65,47 @@ for (let i = 0; i < cities.length; i++) {
 // Grid
 distanceTable.style.gridTemplateRows = "repeat(39, 1fr)"
 
-for (let i = 0; i < 38; i++) {
+for (let i = 0; i <= 39; i++) {
     for (let j = 0; j <= 39; j++) {
         let cell = document.createElement("div");
         cell.classList.add("cell");
-        distanceTable.appendChild(cell);
-
-        cell.textContent = "H";
-        console.log(i);
 
         if (i == 0) {
             cell.classList.add("head_row");
             cell.textContent = j - 1;
         }
+
+        if (i >= 1 && j >= 1) {
+            for (let key in distances) {
+                if (distances[key].city1 == j - 1 && distances[key].city2 == i - 1) {
+                    cell.textContent = distances[key].distance / 10; 
+                }
+                if (distances[key].city2 == j - 1 && distances[key].city1 == i - 1) {
+                    cell.textContent = distances[key].distance / 10; 
+                }
+            }
+        }
+
         if (i == j) {
             cell.textContent = " ";
         }
+
         if (j == 0) {
             cell.classList.add("head_column");
         }
+    
         if (j % 2 == 1) {
             cell.classList.add("even_col");
         }
+
         if (i % 2 == 1) {
             cell.classList.add("even_row");
         }
+
         if (j == 0 && i >= 1) {
             cell.textContent = cities[i - 1].id + " - " + cities[i - 1].name;
-        }
+        } 
+
+        distanceTable.appendChild(cell);
     }
 }
