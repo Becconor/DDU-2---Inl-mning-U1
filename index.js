@@ -15,8 +15,11 @@
 const titleHead = document.querySelector("title");
 const cityTitle = document.querySelector("h2");
 const cityUndertitle = document.querySelector("h3");
+const cityBox = document.querySelector("#cities");
 
 
+
+// Stad sök
 const enterCity = prompt("Vilken stad?");
 let cityWasFound = false;
 
@@ -34,3 +37,26 @@ if (cityWasFound == false) {
     cityUndertitle.innerHTML = " ";
     titleHead.innerHTML = "Not found";
 }
+
+
+// Stads rutor
+
+for (let i = 0; i <= cities.length; i++) {
+    let cityBoxP = document.createElement("p");
+    cityBoxP.classList.add("cityBox");
+    cityBoxP.textContent = cities[i].name;
+    cityBox.appendChild(cityBoxP);
+
+    if (enterCity == cities[i].name) {
+        cityBoxP.classList.add("target");
+    } 
+    
+    if (enterCity == ) {
+        cityBoxP.classList.add("closest");
+    }
+
+    if (enterCity == ) {
+        cityBoxP.classList.add("furthest");
+    }
+}
+
