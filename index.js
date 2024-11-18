@@ -16,7 +16,7 @@ const titleHead = document.querySelector("title");
 const cityTitle = document.querySelector("h2");
 const cityUndertitle = document.querySelector("h3");
 const cityBox = document.querySelector("#cities");
-
+const distanceTable = document.querySelector("#table");
 
 
 // Stad sök
@@ -41,7 +41,7 @@ if (cityWasFound == false) {
 
 // Stads rutor
 
-for (let i = 0; i <= cities.length; i++) {
+for (let i = 0; i < cities.length; i++) {
     let cityBoxP = document.createElement("p");
     cityBoxP.classList.add("cityBox");
     cityBoxP.textContent = cities[i].name;
@@ -51,12 +51,47 @@ for (let i = 0; i <= cities.length; i++) {
         cityBoxP.classList.add("target");
     } 
     
-    if (enterCity == ) {
-        cityBoxP.classList.add("closest");
-    }
+    // if (enterCity == ) {
+    //     cityBoxP.classList.add("closest");
+    // }
 
-    if (enterCity == ) {
-        cityBoxP.classList.add("furthest");
-    }
+    // if (enterCity == ) {
+    //     cityBoxP.classList.add("furthest");
+    // }
 }
 
+
+
+// Grid
+distanceTable.style.gridTemplateRows = "repeat(39, 1fr)"
+
+for (let i = 0; i < 38; i++) {
+    for (let j = 0; j <= 39; j++) {
+        let cell = document.createElement("div");
+        cell.classList.add("cell");
+        distanceTable.appendChild(cell);
+
+        cell.textContent = "H";
+        console.log(i);
+
+        if (i == 0) {
+            cell.classList.add("head_row");
+            cell.textContent = j - 1;
+        }
+        if (i == j) {
+            cell.textContent = " ";
+        }
+        if (j == 0) {
+            cell.classList.add("head_column");
+        }
+        if (j % 2 == 1) {
+            cell.classList.add("even_col");
+        }
+        if (i % 2 == 1) {
+            cell.classList.add("even_row");
+        }
+        if (j == 0 && i >= 1) {
+            cell.textContent = cities[i - 1].id + " - " + cities[i - 1].name;
+        }
+    }
+}
