@@ -1,35 +1,24 @@
 // Recommended: All functions declared here
 
 
-
-
-
-
-
-
-
-
 // Recommended: constants with references to existing HTML-elements
-
-// Recommended: Ask for the city name and then the rest of the code
+const enterCity = prompt("Vilken stad?");
 const titleHead = document.querySelector("title");
 const cityTitle = document.querySelector("h2");
 const cityUndertitle = document.querySelector("h3");
 const cityBox = document.querySelector("#cities");
 const distanceTable = document.querySelector("#table");
-
-
-// Stad sök
-const enterCity = prompt("Vilken stad?");
 let cityWasFound = false;
 
-for (let citiesKey in cities) {
-    if (enterCity == cities[citiesKey].name) {
+
+// Recommended: Ask for the city name and then the rest of the code
+for (let keyCity in cities) {
+    if (enterCity == cities[keyCity].name) {
         cityWasFound = true;
-        cityTitle.innerHTML = `${enterCity} (${cities[citiesKey].country})`;
+        cityTitle.innerHTML = `${enterCity} (${cities[keyCity].country})`;
         titleHead.innerHTML = enterCity;
-        break; // Loopen tar slut när stad hittats eller inte finns.
-    } 
+        break;
+    }
 }
 
 if (cityWasFound == false) {
@@ -38,74 +27,60 @@ if (cityWasFound == false) {
     titleHead.innerHTML = "Not found";
 }
 
-
-// Stads rutor
-
 for (let i = 0; i < cities.length; i++) {
-    let cityBoxP = document.createElement("p");
-    cityBoxP.classList.add("cityBox");
-    cityBoxP.textContent = cities[i].name;
-    cityBox.appendChild(cityBoxP);
+    let cityBoxes = document.createElement("p");
+    cityBoxes.classList.add("cityBox"); 
+    cityBoxes.textContent = cities[i].name; 
+    cityBox.appendChild(cityBoxes); 
 
     if (enterCity == cities[i].name) {
-        cityBoxP.classList.add("target");
-    } 
-    
-    // if (enterCity == ) {
-    //     cityBoxP.classList.add("closest");
-    // }
-
-    // if (enterCity == ) {
-    //     cityBoxP.classList.add("furthest");
-    // }
+        cityBoxes.classList.add("target");
+    }
 }
 
-
-
-// Grid
-distanceTable.style.gridTemplateRows = "repeat(39, 1fr)"
+distanceTable.style.gridTemplateRows = "repeat(39, 1fr)";
 
 for (let i = 0; i <= 39; i++) {
     for (let j = 0; j <= 39; j++) {
-        let cell = document.createElement("div");
-        cell.classList.add("cell");
-
-        if (i == 0) {
-            cell.classList.add("head_row");
-            cell.textContent = j - 1;
-        }
+        let gridCell = document.createElement("div"); 
+        gridCell.classList.add("cell");
+        distanceTable.appendChild(gridCell);
 
         if (i >= 1 && j >= 1) {
-            for (let key in distances) {
-                if (distances[key].city1 == j - 1 && distances[key].city2 == i - 1) {
-                    cell.textContent = distances[key].distance / 10; 
+            for (let distanceKey in distances) {
+                if (distances[distanceKey].city1 == j - 1 && distances[distanceKey].city2 == i - 1) {
+                    gridCell.textContent = distances[distanceKey].distance / 10; 
                 }
-                if (distances[key].city2 == j - 1 && distances[key].city1 == i - 1) {
-                    cell.textContent = distances[key].distance / 10; 
+                if (distances[distanceKey].city2 == j - 1 && distances[distanceKey].city1 == i - 1) {
+                    gridCell.textContent = distances[distanceKey].distance / 10;
                 }
             }
         }
 
-        if (i == j) {
-            cell.textContent = " ";
+        if (i == 0) {
+            gridCell.classList.add("head_row"); 
+            gridCell.textContent = j - 1;
         }
 
         if (j == 0) {
-            cell.classList.add("head_column");
+            gridCell.classList.add("head_column");
+            gridCell.textContent = i - 1; 
         }
-    
-        if (j % 2 == 1) {
-            cell.classList.add("even_col");
+
+        if (i == j) {
+            gridCell.textContent = " "; 
         }
 
         if (i % 2 == 1) {
-            cell.classList.add("even_row");
+            gridCell.classList.add("even_row"); 
+        }
+
+        if (j % 2 == 1 && i != 0) {
+            gridCell.classList.add("even_col"); 
         }
 
         if (j == 0 && i >= 1) {
-            cell.textContent = cities[i - 1].id + " - " + cities[i - 1].name;
-        } 
-
-        distanceTable.appendChild(cell);
+            gridCell.textContent = cities[i - 1].id + " - " + cities[i - 1].name; 
+        }
     }
 }
