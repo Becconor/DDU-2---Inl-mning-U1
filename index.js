@@ -4,9 +4,11 @@ const cityTitle = document.querySelector("h2");
 const cityUndertitle = document.querySelector("h3");
 const cityBoxes = document.querySelector("#cities");
 const distanceTable = document.querySelector("#table");
+const theClosestCity = document.querySelector("#closest");
 
 let enterCity = prompt("Vilken stad?")
 let cityWasFound = false;
+let minDistance = 3000;
 
 
 function createAllCityBoxes() {
@@ -19,9 +21,61 @@ function createAllCityBoxes() {
         if (enterCity == cities[i].name) {
             cityBox.classList.add("target");
         }
+
+        if (closestCityFound == cities[i].name) {
+            cityBox.textContent = `${getClosestCity(enterCity)} ligger ${minDistance / 10} mil bort`;
+            cityBox.classList.add("closest");
+            console.log(closestCityFound);
+        }
     }
 }
 
+function getClosestCity(targetCityObject) {
+    for (let i = 0; i < cities.length; i++) {
+        if (targetCityObject == cities[i].name) {
+            let targetId = i; 
+            for (let j = 0; j < distances.length; j++) {
+
+                let city1 = distances[j].city1;
+                let city2 = distances[j].city2;
+                let distance = distances[j].distance;
+
+                if (city1 === targetId || city2 === targetId) {
+                    let otherCityId;
+                    if (city1 === targetId) {
+                        otherCityId = city2;
+                    } else {
+                        otherCityId = city1;
+                    }
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        
+                        for (let i = 0; i < cities.length; i++) {
+                            if (cities[i].id === otherCityId) {
+                                closestCityFound = cities[i].name;
+                                console.log(closestCityFound);
+                            }           
+                        }
+                    }     
+                }
+            }
+        }
+    }
+
+    if (closestCityFound) {
+        theClosestCity.textContent = closestCityFound;
+        theClosestCity.classList.add("closest");
+
+        console.log(`Closest city to ${targetCityObject} is ${closestCityFound}, which is ${minDistance / 10} mil away.`);
+    } else {
+        console.log("No closest city found.");
+    }
+
+    return closestCityFound;
+}
+
+getClosestCity(enterCity);
 createAllCityBoxes();
 
 // Recommended: constants with references to existing HTML-elements
