@@ -6,8 +6,23 @@ const cityBoxes = document.querySelector("#cities");
 const distanceTable = document.querySelector("#table");
 
 let enterCity = prompt("Vilken stad?")
+let cityWasFound = false;
 
 
+function createAllCityBoxes() {
+    for (let i = 0; i < cities.length; i++) {
+        let cityBox = document.createElement("p");
+        cityBox.classList.add("cityBox"); 
+        cityBox.textContent = cities[i].name; 
+        cityBoxes.appendChild(cityBox); 
+
+        if (enterCity == cities[i].name) {
+            cityBox.classList.add("target");
+        }
+    }
+}
+
+createAllCityBoxes();
 
 // Recommended: constants with references to existing HTML-elements
 
