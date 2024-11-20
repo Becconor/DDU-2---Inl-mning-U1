@@ -5,11 +5,12 @@ const cityUndertitle = document.querySelector("h3");
 const cityBoxes = document.querySelector("#cities");
 const distanceTable = document.querySelector("#table");
 const theClosestCity = document.querySelector("#closest");
+const theFurthestCity = document.querySelector("#furthest");
 
 let enterCity = prompt("Vilken stad?")
 let cityWasFound = false;
 let minDistance = 3000;
-
+let maxDistance = 0;
 
 function createAllCityBoxes() {
     for (let i = 0; i < cities.length; i++) {
@@ -26,6 +27,12 @@ function createAllCityBoxes() {
             cityBox.textContent = `${getClosestCity(enterCity)} ligger ${minDistance / 10} mil bort`;
             cityBox.classList.add("closest");
             console.log(closestCityFound);
+        }
+
+        if (furthestCityFound == cities[i].name) {
+            cityBox.textContent = `${getFurthestCity(enterCity)} ligger ${maxDistance / 10} mil bort`;
+            cityBox.classList.add("furthest");
+            console.log(furthestCityFound );
         }
     }
 }
@@ -75,7 +82,54 @@ function getClosestCity(targetCityObject) {
     return closestCityFound;
 }
 
+function getFurthestCity(targetCityObject) {
+    for (let i = 0; i < cities.length; i++) {
+        if (targetCityObject == cities[i].name) {
+            let targetId = i; 
+            for (let j = 0; j < distances.length; j++) {
+
+                let city1 = distances[j].city1;
+                let city2 = distances[j].city2;
+                let distance = distances[j].distance;
+
+                if (city1 === targetId || city2 === targetId) {
+                    let otherCityId;
+                    if (city1 === targetId) {
+                        otherCityId = city2;
+                    } else {
+                        otherCityId = city1;
+                    }
+
+                    if (distance > maxDistance) {
+                        maxDistance = distance;
+                        
+                        for (let i = 0; i < cities.length; i++) {
+                            if (cities[i].id === otherCityId) {
+                                furthestCityFound = cities[i].name;
+                                console.log(furthestCityFound);
+                            }           
+                        }
+                    }     
+                }
+            }
+        }
+    }
+
+    if (furthestCityFound) {
+        // const theFurthestCity = document.querySelector("#furthest");
+        theFurthestCity.textContent = furthestCityFound;
+        theFurthestCity.classList.add("furthest");
+
+        console.log(`Furthest city to ${targetCityObject} is ${furthestCityFound}, which is ${maxDistance / 10} mil away.`);
+    } else {
+        console.log("No furthest city found.");
+    }
+
+    return furthestCityFound;
+}
+
 getClosestCity(enterCity);
+getFurthestCity(enterCity);
 createAllCityBoxes();
 
 // Recommended: constants with references to existing HTML-elements
@@ -96,7 +150,6 @@ if (cityWasFound == false) {
     cityUndertitle.innerHTML = " ";
     titleHead.innerHTML = "Not found";
 }
-
 
 for (let i = 0; i <= 39; i++) {
     for (let j = 0; j <= 39; j++) {
