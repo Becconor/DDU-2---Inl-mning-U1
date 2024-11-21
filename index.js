@@ -9,6 +9,8 @@ const theFurthestCity = document.querySelector("#furthest");
 
 let enterCity = prompt("Vilken stad?")
 let cityWasFound = false;
+let closestCityFound = null;
+let furthestCityFound = null;
 let minDistance = 3000;
 let maxDistance = 0;
 
@@ -24,13 +26,13 @@ function createAllCityBoxes() {
         }
 
         if (closestCityFound == cities[i].name) {
-            cityBox.textContent = `${getClosestCity(enterCity)} ligger ${minDistance / 10} mil bort`;
+            cityBox.textContent = `${closestCityFound} ligger ${minDistance / 10} mil bort`;
             cityBox.classList.add("closest");
             console.log(closestCityFound);
         }
 
         if (furthestCityFound == cities[i].name) {
-            cityBox.textContent = `${getFurthestCity(enterCity)} ligger ${maxDistance / 10} mil bort`;
+            cityBox.textContent = `${furthestCityFound} ligger ${maxDistance / 10} mil bort`;
             cityBox.classList.add("furthest");
             console.log(furthestCityFound );
         }
