@@ -151,47 +151,47 @@ if (cityWasFound == false) {
     titleHead.innerHTML = "Not found";
 }
 
-for (let i = 0; i <= 39; i++) {
-    for (let j = 0; j <= 39; j++) {
+for (let row = 0; row <= 39; row++) {
+    for (let column = 0; column <= 39; column++) {
         let gridCell = document.createElement("div"); 
         gridCell.classList.add("cell"); 
         distanceTable.appendChild(gridCell); 
 
-        if (i >= 1 && j >= 1) {
+        if (row >= 1 && column >= 1) {
             for (let distanceKey in distances) {
-                if (distances[distanceKey].city1 == j - 1 && distances[distanceKey].city2 == i - 1) {
+                if (distances[distanceKey].city1 == column - 1 && distances[distanceKey].city2 == row - 1) {
                     gridCell.textContent = distances[distanceKey].distance / 10; 
                 }
-                if (distances[distanceKey].city2 == j - 1 && distances[distanceKey].city1 == i - 1) {
+                if (distances[distanceKey].city2 == column - 1 && distances[distanceKey].city1 == row - 1) {
                     gridCell.textContent = distances[distanceKey].distance / 10; 
                 }
             }
         }
 
-        if (i == 0) {
+        if (row == 0) {
             gridCell.classList.add("head_row"); 
-            gridCell.textContent = j - 1; 
+            gridCell.textContent = column - 1; 
         }
 
-        if (j == 0) {
+        if (column == 0) {
             gridCell.classList.add("head_column"); 
-            gridCell.textContent = i - 1; 
+            gridCell.textContent = row - 1; 
         }
 
-        if (i == j) {
+        if (row == column) {
             gridCell.textContent = " ";
         }
 
-        if (i % 2 == 1) {
+        if (row % 2 == 1) {
             gridCell.classList.add("even_row"); 
         }
 
-        if (j % 2 == 1 && i != 0) {
+        if (column % 2 == 1 && row != 0) {
             gridCell.classList.add("even_col"); 
         }
 
-        if (j == 0 && i >= 1) {
-            gridCell.textContent = cities[i - 1].id + " - " + cities[i - 1].name;
+        if (column == 0 && row >= 1) {
+            gridCell.textContent = cities[row - 1].id + " - " + cities[row - 1].name;
         }
     }
 }
