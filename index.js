@@ -6,7 +6,7 @@ const distanceTable = document.querySelector("#table");
 const theClosestCity = document.querySelector("#closest");
 const theFurthestCity = document.querySelector("#furthest");
 
-let enterCity = prompt("Vilken stad?")
+let enterCity = prompt("Vilken stad?");
 let cityWasFound = false;
 let closestCityFound = null;
 let furthestCityFound = null;
@@ -59,9 +59,9 @@ function getClosestCity(targetCityObject) {
                     if (distance < minDistance) {
                         minDistance = distance;
                         
-                        for (let i = 0; i < cities.length; i++) {
-                            if (cities[i].id === otherCityId) {
-                                closestCityFound = cities[i].name;
+                        for (let k = 0; k < cities.length; k++) {
+                            if (cities[k].id === otherCityId) {
+                                closestCityFound = cities[k].name;
                                 console.log(closestCityFound);
                             }           
                         }
