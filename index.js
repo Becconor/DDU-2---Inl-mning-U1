@@ -27,13 +27,11 @@ function createAllCityBoxes() {
         if (closestCityFound == cities[i].name) {
             cityBox.textContent = `${closestCityFound} ligger ${minDistance / 10} mil bort`;
             cityBox.classList.add("closest");
-            console.log(closestCityFound);
         }
 
         if (furthestCityFound == cities[i].name) {
             cityBox.textContent = `${furthestCityFound} ligger ${maxDistance / 10} mil bort`;
             cityBox.classList.add("furthest");
-            console.log(furthestCityFound );
         }
     }
 }
@@ -43,7 +41,6 @@ function getClosestCity(targetCityObject) {
         if (targetCityObject == cities[i].name) {
             let targetId = i; 
             for (let j = 0; j < distances.length; j++) {
-
                 let city1 = distances[j].city1;
                 let city2 = distances[j].city2;
                 let distance = distances[j].distance;
@@ -62,7 +59,6 @@ function getClosestCity(targetCityObject) {
                         for (let k = 0; k < cities.length; k++) {
                             if (cities[k].id === otherCityId) {
                                 closestCityFound = cities[k].name;
-                                console.log(closestCityFound);
                             }           
                         }
                     }     
@@ -74,9 +70,6 @@ function getClosestCity(targetCityObject) {
     if (closestCityFound != null) {
         theClosestCity.textContent = closestCityFound;
         theClosestCity.classList.add("closest");
-        console.log(`Closest city to ${targetCityObject} is ${closestCityFound}, which is ${minDistance / 10} mil away.`);
-    } else {
-        console.log("No closest city found.");
     }
 
     return closestCityFound;
@@ -87,7 +80,6 @@ function getFurthestCity(targetCityObject) {
         if (targetCityObject == cities[i].name) {
             let targetId = i; 
             for (let j = 0; j < distances.length; j++) {
-
                 let city1 = distances[j].city1;
                 let city2 = distances[j].city2;
                 let distance = distances[j].distance;
@@ -106,7 +98,6 @@ function getFurthestCity(targetCityObject) {
                         for (let i = 0; i < cities.length; i++) {
                             if (cities[i].id === otherCityId) {
                                 furthestCityFound = cities[i].name;
-                                console.log(furthestCityFound);
                             }           
                         }
                     }     
@@ -118,9 +109,6 @@ function getFurthestCity(targetCityObject) {
     if (furthestCityFound != null) {
         theFurthestCity.textContent = furthestCityFound;
         theFurthestCity.classList.add("furthest");
-        console.log(`Furthest city to ${targetCityObject} is ${furthestCityFound}, which is ${maxDistance / 10} mil away.`);
-    } else {
-        console.log("No furthest city found.");
     }
 
     return furthestCityFound;
@@ -129,7 +117,6 @@ function getFurthestCity(targetCityObject) {
 getClosestCity(enterCity);
 getFurthestCity(enterCity);
 createAllCityBoxes();
-
 
 for (let keyCity in cities) {
     if (enterCity == cities[keyCity].name) {
