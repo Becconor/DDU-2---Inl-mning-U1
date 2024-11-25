@@ -1,4 +1,3 @@
-// Recommended: All functions declared here
 const titleHead = document.querySelector("title");
 const cityTitle = document.querySelector("h2");
 const cityUndertitle = document.querySelector("h3");
@@ -118,7 +117,6 @@ function getFurthestCity(targetCityObject) {
     }
 
     if (furthestCityFound) {
-        // const theFurthestCity = document.querySelector("#furthest");
         theFurthestCity.textContent = furthestCityFound;
         theFurthestCity.classList.add("furthest");
 
@@ -134,10 +132,7 @@ getClosestCity(enterCity);
 getFurthestCity(enterCity);
 createAllCityBoxes();
 
-// Recommended: constants with references to existing HTML-elements
 
-
-// Recommended: Ask for the city name and then the rest of the code
 for (let keyCity in cities) {
     if (enterCity == cities[keyCity].name) {
         cityWasFound = true;
