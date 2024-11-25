@@ -71,10 +71,9 @@ function getClosestCity(targetCityObject) {
         }
     }
 
-    if (closestCityFound) {
+    if (closestCityFound != null) {
         theClosestCity.textContent = closestCityFound;
         theClosestCity.classList.add("closest");
-
         console.log(`Closest city to ${targetCityObject} is ${closestCityFound}, which is ${minDistance / 10} mil away.`);
     } else {
         console.log("No closest city found.");
@@ -116,10 +115,9 @@ function getFurthestCity(targetCityObject) {
         }
     }
 
-    if (furthestCityFound) {
+    if (furthestCityFound != null) {
         theFurthestCity.textContent = furthestCityFound;
         theFurthestCity.classList.add("furthest");
-
         console.log(`Furthest city to ${targetCityObject} is ${furthestCityFound}, which is ${maxDistance / 10} mil away.`);
     } else {
         console.log("No furthest city found.");
@@ -148,8 +146,8 @@ if (cityWasFound == false) {
     titleHead.innerHTML = "Not found";
 }
 
-for (let row = 0; row <= 39; row++) {
-    for (let column = 0; column <= 39; column++) {
+for (let row = 0; row <= cities.length; row++) {
+    for (let column = 0; column <= cities.length; column++) {
         let gridCell = document.createElement("div"); 
         gridCell.classList.add("cell"); 
         distanceTable.appendChild(gridCell); 
@@ -170,9 +168,9 @@ for (let row = 0; row <= 39; row++) {
             gridCell.textContent = column - 1; 
         }
 
-        if (column == 0) {
+        if (column == 0 && row >= 1) {
             gridCell.classList.add("head_column"); 
-            gridCell.textContent = row - 1; 
+            gridCell.textContent = cities[row - 1].id + " - " + cities[row - 1].name;
         }
 
         if (row == column) {
@@ -185,10 +183,6 @@ for (let row = 0; row <= 39; row++) {
 
         if (column % 2 == 1 && row != 0) {
             gridCell.classList.add("even_col"); 
-        }
-
-        if (column == 0 && row >= 1) {
-            gridCell.textContent = cities[row - 1].id + " - " + cities[row - 1].name;
         }
     }
 }
