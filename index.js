@@ -16,9 +16,9 @@ let maxDistance = 0;
 function createAllCityBoxes() {
     for (let i = 0; i < cities.length; i++) {
         let cityBox = document.createElement("p");
-        cityBox.classList.add("cityBox"); 
-        cityBox.textContent = cities[i].name; 
-        cityBoxes.appendChild(cityBox); 
+        cityBox.classList.add("cityBox");
+        cityBox.textContent = cities[i].name;
+        cityBoxes.appendChild(cityBox);
 
         if (enterCity == cities[i].name) {
             cityBox.classList.add("target");
@@ -39,7 +39,7 @@ function createAllCityBoxes() {
 function getClosestCity(targetCityObject) {
     for (let i = 0; i < cities.length; i++) {
         if (targetCityObject == cities[i].name) {
-            let targetId = i; 
+            let targetId = i;
             for (let j = 0; j < distances.length; j++) {
                 let city1 = distances[j].city1;
                 let city2 = distances[j].city2;
@@ -55,13 +55,13 @@ function getClosestCity(targetCityObject) {
 
                     if (distance < minDistance) {
                         minDistance = distance;
-                        
+
                         for (let k = 0; k < cities.length; k++) {
                             if (cities[k].id === otherCityId) {
                                 closestCityFound = cities[k].name;
-                            }           
+                            }
                         }
-                    }     
+                    }
                 }
             }
         }
@@ -78,7 +78,7 @@ function getClosestCity(targetCityObject) {
 function getFurthestCity(targetCityObject) {
     for (let i = 0; i < cities.length; i++) {
         if (targetCityObject == cities[i].name) {
-            let targetId = i; 
+            let targetId = i;
             for (let j = 0; j < distances.length; j++) {
                 let city1 = distances[j].city1;
                 let city2 = distances[j].city2;
@@ -94,13 +94,13 @@ function getFurthestCity(targetCityObject) {
 
                     if (distance > maxDistance) {
                         maxDistance = distance;
-                        
+
                         for (let i = 0; i < cities.length; i++) {
                             if (cities[i].id === otherCityId) {
                                 furthestCityFound = cities[i].name;
-                            }           
+                            }
                         }
-                    }     
+                    }
                 }
             }
         }
@@ -135,28 +135,28 @@ if (cityWasFound == false) {
 
 for (let row = 0; row <= cities.length; row++) {
     for (let column = 0; column <= cities.length; column++) {
-        let gridCell = document.createElement("div"); 
-        gridCell.classList.add("cell"); 
-        distanceTable.appendChild(gridCell); 
+        let gridCell = document.createElement("div");
+        gridCell.classList.add("cell");
+        distanceTable.appendChild(gridCell);
 
         if (row >= 1 && column >= 1) {
             for (let distanceKey in distances) {
                 if (distances[distanceKey].city1 == column - 1 && distances[distanceKey].city2 == row - 1) {
-                    gridCell.textContent = distances[distanceKey].distance / 10; 
+                    gridCell.textContent = distances[distanceKey].distance / 10;
                 }
                 if (distances[distanceKey].city2 == column - 1 && distances[distanceKey].city1 == row - 1) {
-                    gridCell.textContent = distances[distanceKey].distance / 10; 
+                    gridCell.textContent = distances[distanceKey].distance / 10;
                 }
             }
         }
 
         if (row == 0) {
-            gridCell.classList.add("head_row"); 
-            gridCell.textContent = column - 1; 
+            gridCell.classList.add("head_row");
+            gridCell.textContent = column - 1;
         }
 
         if (column == 0 && row >= 1) {
-            gridCell.classList.add("head_column"); 
+            gridCell.classList.add("head_column");
             gridCell.textContent = cities[row - 1].id + " - " + cities[row - 1].name;
         }
 
@@ -165,11 +165,14 @@ for (let row = 0; row <= cities.length; row++) {
         }
 
         if (row % 2 == 1) {
-            gridCell.classList.add("even_row"); 
+            gridCell.classList.add("even_row");
         }
 
         if (column % 2 == 1 && row != 0) {
-            gridCell.classList.add("even_col"); 
+            gridCell.classList.add("even_col");
         }
     }
 }
+
+
+
